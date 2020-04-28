@@ -3,6 +3,10 @@ from django.urls import reverse
 from django.utils import timezone
 from django.contrib.auth.models import User
 
+# Append these imports for moderator class.
+from django_comments.moderation import CommentModerator
+from django_comments_xtd.moderation import moderator, XtdCommentModerator
+
 
 class PublicManager(models.Manager):
     def get_queryset(self):
@@ -34,4 +38,11 @@ class Post(models.Model):
                                'month': self.publish.strftime('%b'),
                                'day': self.publish.strftime('%d'),
                                'slug': self.slug})
+
+
+class PostCommentModerator(XtdCommentModerator):
+    removal_suggestion_notification = True
+
+
+moderator.register(Post, PostCommentModerator)
 

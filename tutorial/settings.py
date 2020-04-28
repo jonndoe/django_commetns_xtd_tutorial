@@ -157,10 +157,13 @@ COMMENTS_XTD_FROM_EMAIL = "noreply@example.com"
 # Contact mail address to show in messages.
 COMMENTS_XTD_CONTACT_EMAIL = "helpdesk@example.com"
 
-#COMMENTS_XTD_MAX_THREAD_LEVEL = 2
+COMMENTS_XTD_MAX_THREAD_LEVEL = 1
+COMMENTS_XTD_LIST_ORDER = ('-thread_id', 'order')  # default is ('thread_id', 'order')
 
 # Either enable sending mail messages to the console:
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+COMMENTS_XTD_CONFIRM_EMAIL = False
 
 # Or set up the EMAIL_* settings so that Django can send emails:
 EMAIL_HOST = "smtp.mail.com"
@@ -173,4 +176,12 @@ DEFAULT_FROM_EMAIL = "Helpdesk <helpdesk@yourdomain>"
 MANAGERS = (
     ('Joe Bloggs', 'joe.bloggs@example.com'),
 )
+
+COMMENTS_XTD_APP_MODEL_OPTIONS = {
+    'blog.post': {
+        'allow_flagging': True,
+        'allow_feedback': True,
+        'show_feedback': True,
+    }
+}
 
